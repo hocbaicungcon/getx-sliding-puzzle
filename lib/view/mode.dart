@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_puzzlee/controller/puzzle_controller.dart';
+import 'package:sliding_puzzlee/view/component/flat_white_box.dart';
 
 class Mode extends StatelessWidget {
-  PuzzleController puzzleController = Get.find();
+  final PuzzleController puzzleController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -13,17 +14,17 @@ class Mode extends StatelessWidget {
             onPressed: () {
               puzzleController.mode = 'doraemon';
             },
-            child: Text('DORAEMON')),
+            child: FlatWhiteBoxText('DORA')),
         TextButton(
             onPressed: () {
               puzzleController.mode = 'mickey';
             },
-            child: Text('MICKEY')),
+            child: FlatWhiteBoxText('MICKEY')),
         TextButton(
             onPressed: () {
               puzzleController.mode = 'tifa';
             },
-            child: Text('TIFA')),
+            child: FlatWhiteBoxText('TIFA')),
       ],
     );
   }

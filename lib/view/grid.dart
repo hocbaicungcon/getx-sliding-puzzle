@@ -12,14 +12,23 @@ class Grid extends StatelessWidget {
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 2,
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 1,
           ),
           itemCount: 16,
           itemBuilder: (context, index) {
             return Obx(
               () => GestureDetector(
+                  onDoubleTap: () {
+                    Get.to(Win());
+                    puzzleController.started = false;
+                    puzzleController.gameStoped();
+                  },
                   onTap: () {
+                    if (puzzleController.started == false) {
+                      puzzleController.started = true;
+                      puzzleController.gameStarted();
+                    }
                     if ((index - 1 >= 0 &&
                             puzzleController.puzzle[index - 1] == '16' &&
                             index % 4 != 0) ||
@@ -35,6 +44,7 @@ class Grid extends StatelessWidget {
                           puzzleController.puzzle[index];
                       puzzleController.puzzle[index] = '16';
                     }
+
                     bool equal = true;
                     for (var i = 0; i < 16; i++) {
                       if (int.parse(puzzleController.puzzle[i]) - i != 1) {
@@ -43,9 +53,12 @@ class Grid extends StatelessWidget {
                       }
                     }
                     if (equal) {
+                      puzzleController.started = false;
+                      puzzleController.gameStoped();
                       print('YOU WON');
                       Get.to(Win());
                     }
+                    puzzleController.movesCount();
                   },
                   child: Image(
                     fit: BoxFit.fill,

@@ -4,7 +4,7 @@ import 'package:sliding_puzzlee/controller/puzzle_controller.dart';
 import 'package:sliding_puzzlee/view/win.dart';
 
 class Grid extends StatelessWidget {
-  PuzzleController puzzleController = Get.find();
+  final PuzzleController puzzleController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
